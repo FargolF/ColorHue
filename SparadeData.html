@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+       <link rel="manifest" href="manifest.json">
+       <meta name="theme-color" content="#8BC4C3">
+       
+    <title>ColorHue</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Georgia", serif;
+            background: #181d2b;
+        }
+
+        /* Top bar */
+        .header {
+            width: 100%;
+            background-color: #1c2234; 
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+
+        .header-title {
+            font-size: 60px;
+            font-weight: 300;
+        }
+
+        /* Hamburger menu */
+        .menu-icon {
+            width: 28px;
+            height: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .menu-icon div {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+        }
+
+        /* Main content */
+        .container {
+            text-align: center;
+            margin-top: 250px;
+        }
+
+        h1 {
+            color: #6ad09d;
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #59b085;
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+
+        h2.page-title {
+            text-align: center;
+            font-size: 36px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            color: #6ad09d;
+        }
+    
+        h3.page-title {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 5px;
+            color: #36674f;
+        }
+
+        h4.page-title {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 5px;
+            color: #439d70;
+        }
+
+        /* Button */
+.button {
+    display: inline-block;
+    padding: 20px 30px;
+    background-color: #6ad09d;
+    color: white;
+    border-radius: 50px;
+    border: 2px solid #4e9873;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: 0px 10px 6px #203e2f;
+    text-decoration: none; /* removes underline */
+    text-align: center;
+    font-size: 18px;
+    font-family: inherit;
+}
+
+
+
+        h5.page-title {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 10px;
+            color: #36674f;
+        }
+
+        .button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 40px; /* space between buttons */
+    justify-items: center; /* center buttons in each column */
+    margin-top: 50px;
+}
+
+
+        .button:hover {
+            background-color: #4f746f;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="ColorHueHomePage.html" class="header-title" style="text-decoration: none; color: white;">ColorHue</a>
+
+
+
+
+        <div class="menu-icon">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+
+<h2 class="page-title">Sparade Data</h2>
+
+
+<h4 class="page-title">Bosses Sensor</h4>
+
+<h3 class="page-title">Välj datum att visa:</h3>
+
+</div>
+
+<div class="button-grid">
+
+    <a href="nov10.html" class="button">Nov 10</a>
+    <a href="nov22.html" class="button">Nov 22</a>
+    <a href="nov29.html" class="button">Nov 29</a>
+    <a href="dec3.html" class="button">Dec 3</a>
+    <a href="dec5.html" class="button">Dec 5</a>
+    <a href="add1.html" class="button">+</a>
+    <a href="add2.html" class="button">+</a>
+    <a href="add3.html" class="button">+</a>
+
+</div>
+
+
+    <h5 class="page-title">Lägg till datum genom att clicka på +</h5>
+
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+
+</body>
+</html>

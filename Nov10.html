@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+       <link rel="manifest" href="manifest.json">
+       <meta name="theme-color" content="#8BC4C3">
+       
+    <title>ColorHue</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Georgia", serif;
+            background: #181d2b;
+        }
+
+        /* Top bar */
+        .header {
+            width: 100%;
+            background-color: #1c2234; 
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+
+        .header-title {
+            font-size: 60px;
+            font-weight: 300;
+        }
+
+        /* Hamburger menu */
+        .menu-icon {
+            width: 28px;
+            height: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .menu-icon div {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+        }
+
+        /* Main content */
+        .container {
+            text-align: center;
+            margin-top: 250px;
+        }
+
+        h1 {
+            color: #6ad09d;
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #59b085;
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+
+        /* Button */
+        .button {
+            padding: 16px 40px;
+            font-size: 22px;
+            background-color: #6ad09d;
+            color: white;
+            border-radius: 50px;
+            border: 2px solid #4e9873;
+            cursor: pointer;
+            transition: 0.2s ease;
+            box-shadow: 0px 10px 6px #203e2f;
+        }
+
+        .button:hover {
+            background-color: #4f746f;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+       <a href="ColorHueHomePage.html" class="header-title" style="text-decoration: none; color: white;">ColorHue</a>
+
+        <div class="menu-icon">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+
+
+</body>
+</html>
