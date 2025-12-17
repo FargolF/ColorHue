@@ -19,7 +19,6 @@
       background: #cdd8f9;
     }
 
-    /* HEADER */
     .header {
       width: 100%;
       background-color: #1c2234;
@@ -36,7 +35,6 @@
       font-weight: 300;
     }
 
-    /* MENU ICON */
     .menu-icon {
       width: 28px;
       height: 18px;
@@ -53,7 +51,6 @@
       border-radius: 2px;
     }
 
-    /* DATE / TIME */
     #datetime-box {
       width: 25%;
       background: #cdd8f9;
@@ -64,7 +61,6 @@
       font-family: Arial, sans-serif;
     }
 
-    /* CONTENT */
     .container {
       text-align: center;
       margin-top: 20px;
@@ -77,7 +73,6 @@
       margin: 20px 0 10px;
     }
 
-    /* CHART */
     .chart-container {
       width: 95%;
       max-width: 1200px;
@@ -95,7 +90,6 @@
       display: block;
     }
 
-    /* BUTTON BELOW CHART */
     .chart-button-wrap {
       display: flex;
       justify-content: center;
@@ -117,173 +111,109 @@
     .chart-button:hover {
       background-color: #3b4b7c;
     }
-
-    @media (max-width: 768px) {
-      .header {
-        padding: 16px 20px;
-      }
-      .header-title {
-        font-size: 42px;
-      }
-      h1 {
-        font-size: 36px;
-      }
-      .chart-container {
-        height: 70vh;
-        min-height: 320px;
-      }
-      .chart-button {
-        font-size: 18px;
-        padding: 14px 32px;
-      }
-    }
   </style>
 </head>
 
 <body>
 
-  <header class="header">
-    <a href="LuftfuktighetNu.html" class="header-title" style="text-decoration: none; color: white;">
-        ColorHue
-    </a>
-    <div class="menu-icon" aria-label="Menu">
-      <div></div><div></div><div></div>
-    </div>
-  </header>
-
-  <div id="datetime-box"></div>
-
-  <div class="container">
-    <h1>Bosses Sensor</h1>
+<header class="header">
+  <a href="LuftfuktighetNu.html" class="header-title" style="text-decoration: none; color: white;">
+    ColorHue
+  </a>
+  <div class="menu-icon">
+    <div></div><div></div><div></div>
   </div>
+</header>
 
-  <div class="chart-container">
-    <canvas id="myChart"></canvas>
-  </div>
+<div id="datetime-box"></div>
 
-  <!-- BUTTON UNDER GRAPH -->
-  <div class="chart-button-wrap">
-    <button class="chart-button" onclick="handleChartButton()">
-      Spara grafen
-    </button>
-  </div>
+<div class="container">
+  <h1>Bosses Sensor</h1>
+</div>
 
-  <script>
-    /* DATE / TIME */
-    function setDateTime() {
-      const d = new Date();
-      const dd = String(d.getDate()).padStart(2,'0');
-      const mm = String(d.getMonth()+1).padStart(2,'0');
-      const yyyy = d.getFullYear();
-      const hh = String(d.getHours()).padStart(2,'0');
-      const mi = String(d.getMinutes()).padStart(2,'0');
-      document.getElementById('datetime-box').textContent =
-        `${dd}/${mm}-${yyyy}  ${hh}:${mi}`;
-    }
-    setDateTime();
-    setInterval(setDateTime, 30 * 1000);
+<div class="chart-container">
+  <canvas id="myChart"></canvas>
+</div>
 
-    /* SENSOR FETCH */
-    async function fetchSensorData() {
-      const res = await fetch('/sensor');
-      if (!res.ok) throw new Error('HTTP-fel: ' + res.status);
-      const json = await res.json();
-      return {
-        humidity: json.humidity,
-        temperature: json.temperature
-      };
-    }
+<div class="chart-button-wrap">
+  <button class="chart-button" onclick="handleChartButton()">
+    Spara grafen
+  </button>
+</div>
 
-    const MAX_POINTS = 36;
-    const humidityColor = '34, 139, 34';
-    const temperatureColor = '153, 102, 255';
+<script>
+  function setDateTime() {
+    const d = new Date();
+    const dd = String(d.getDate()).padStart(2,'0');
+    const mm = String(d.getMonth()+1).padStart(2,'0');
+    const yyyy = d.getFullYear();
+    const hh = String(d.getHours()).padStart(2,'0');
+    const mi = String(d.getMinutes()).padStart(2,'0');
+    document.getElementById('datetime-box').textContent =
+      `${dd}/${mm}-${yyyy}  ${hh}:${mi}`;
+  }
+  setDateTime();
+  setInterval(setDateTime, 30 * 1000);
 
-    const data = {
-      labels: [],
-      datasets: [
-        {
-          label: 'Luftfuktighet (%)',
-          data: [],
-          borderColor: `rgb(${humidityColor})`,
-          backgroundColor: `rgba(${humidityColor})`,
-          yAxisID: 'y',
-          tension: 0.3,
-          fill: true
-        },
-        {
-          label: 'Temperatur (°C)',
-          data: [],
-          borderColor: `rgb(${temperatureColor})`,
-          backgroundColor: `rgba(${temperatureColor}`,
-          yAxisID: 'y1',
-          tension: 0.3,
-          fill: true
-        }
-      ]
-    };
+  const humidityColor = '34, 139, 34';
+  const temperatureColor = '153, 102, 255';
 
-    const config = {
-      type: 'line',
-      data,
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          title: {
-            display: true,
-            text: 'Luftfuktighet och temperatur - ColorHue',
-            font: { size: 20 }
-          },
-          legend: { labels: { font: { size: 16 } } }
-        },
-        scales: {
-          x: { title: { display: true, text: 'Tid', font: { size: 16 } } },
-          y: { suggestedMin: 0, suggestedMax: 100 },
-          y1: { position: 'right', grid: { drawOnChartArea: false } }
-        }
+  const data = {
+    labels: [
+      "14:04","14:09","14:14","14:19","14:24","14:29",
+      "14:34","14:39","14:44","14:49","14:54","14:59"
+    ],
+    datasets: [
+      {
+        label: 'Luftfuktighet (%)',
+        data: [77, 38, 30, 94, 95, 96, 56, 42, 39, 38, 38, 37],
+        borderColor: `rgb(${humidityColor})`,
+        backgroundColor: `rgba(${humidityColor}, 0.25)`,
+        yAxisID: 'y',
+        tension: 0.3,
+        fill: false
+      },
+      {
+        label: 'Temperatur (°C)',
+        data: [23, 21, 27, 23, 22, 22, 20, 20, 21, 22, 22, 22],
+        borderColor: `rgb(${temperatureColor})`,
+        backgroundColor: `rgba(${temperatureColor}, 0.25)`,
+        yAxisID: 'y1',
+        tension: 0.3,
+        fill: false
       }
-    };
+    ]
+  };
 
-    const myChart = new Chart(
-      document.getElementById('myChart'),
-      config
-    );
-
-    function getTimeLabel() {
-      const now = new Date();
-      return `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-    }
-
-    async function addNewReading() {
-      try {
-        const r = await fetchSensorData();
-        if (data.labels.length >= MAX_POINTS) {
-          data.labels.shift();
-          data.datasets[0].data.shift();
-          data.datasets[1].data.shift();
-        }
-        data.labels.push(getTimeLabel());
-        data.datasets[0].data.push(r.humidity);
-        data.datasets[1].data.push(r.temperature);
-        myChart.update();
-      } catch (e) {
-        console.error(e);
+  const config = {
+    type: 'line',
+    data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Luftfuktighet och temperatur - ColorHue',
+          font: { size: 20 }
+        },
+        legend: { labels: { font: { size: 16 } } }
+      },
+      scales: {
+        x: { title: { display: true, text: 'Tid', font: { size: 16 } } },
+        y: { suggestedMin: 0, suggestedMax: 100 },
+        y1: { position: 'right', grid: { drawOnChartArea: false } }
       }
     }
+  };
 
-    addNewReading();
-    setInterval(addNewReading, 5 * 60 * 1000);
+  new Chart(document.getElementById('myChart'), config);
 
-    /* BUTTON ACTION */
-    function handleChartButton() {
-      console.log("Knappen under grafen klickades");
-        window.location.href = "SparadeGrafer.html";
-      // Exempel:
-      // window.location.href = "graf-detaljer.html";
-      // myChart.resetZoom();
-    }
-  </script>
+  function handleChartButton() {
+    window.location.href = "SparadeGrafer.html";
+  }
+</script>
 
 </body>
 </html>
